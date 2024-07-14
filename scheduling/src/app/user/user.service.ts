@@ -19,6 +19,15 @@ export class UserService {
     );
   }
 
+  addUser(user: any): Observable<any> {
+    console.log("test");
+    const headers = this.getHeaders();
+
+    return this.http.post<any>(this.apiUrl, user, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('access_token');
 

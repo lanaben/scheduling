@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component'; // Ensure the path is correct
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     CommonModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule 
   ],
   exports: [
     UserComponent // Exporting if you need to use it in other modules
