@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class UserService {
   private apiUrl = 'https://api4.allhours.com/api/v1/Users';
+  private absencesUrl = 'https://api4.allhours.com/api/v1/Absences';
 
   constructor(private http: HttpClient) { }
 
@@ -28,6 +29,14 @@ export class UserService {
     );
   }
 
+  addAbsence(absence: any): Observable<any> {
+    const headers = this.getHeaders();
+
+    return this.http.post<any>(this.absencesUrl, absence, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('access_token');
 
@@ -37,9 +46,7 @@ export class UserService {
         'Content-Type': 'application/json'
       });
     } else {
-      // Handle case where access token is not available
       console.error('Access token not found in local storage');
-      // You might want to redirect to login or handle this error scenario
       return new HttpHeaders();
     }
   }

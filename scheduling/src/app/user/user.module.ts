@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule 
   ],
   exports: [
-    UserComponent // Exporting if you need to use it in other modules
+    UserComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

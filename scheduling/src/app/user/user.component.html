@@ -23,6 +23,90 @@
     </div>
     <button type="submit">Submit</button>
   </form>
+
+  <!-- Absence Form Section -->
+  <div class="absence-form-container" *ngIf="selectedUserId">
+    <h2>Add Absence</h2>
+    <form (ngSubmit)="submitAbsence()">
+      <div>
+        <label for="absenceDefinitionId">Absence Definition ID:</label>
+        <input
+          type="text"
+          id="absenceDefinitionId"
+          name="absenceDefinitionId"
+          [(ngModel)]="newAbsence.AbsenceDefinitionId"
+          required
+        />
+      </div>
+      <div>
+        <label for="timestamp">Timestamp:</label>
+        <input
+          type="datetime-local"
+          id="timestamp"
+          name="timestamp"
+          [(ngModel)]="newAbsence.Timestamp"
+          required
+        />
+      </div>
+      <div>
+        <label for="comment">Comment:</label>
+        <input
+          type="text"
+          id="comment"
+          name="comment"
+          [(ngModel)]="newAbsence.Comment"
+        />
+      </div>
+      <div>
+        <label for="partialTimeFrom">Partial Time From:</label>
+        <input
+          type="datetime-local"
+          id="partialTimeFrom"
+          name="partialTimeFrom"
+          [(ngModel)]="newAbsence.PartialTimeFrom"
+        />
+      </div>
+      <div>
+        <label for="partialTimeTo">Partial Time To:</label>
+        <input
+          type="datetime-local"
+          id="partialTimeTo"
+          name="partialTimeTo"
+          [(ngModel)]="newAbsence.PartialTimeTo"
+        />
+      </div>
+      <div>
+        <label for="partialTimeDuration">Partial Time Duration:</label>
+        <input
+          type="number"
+          id="partialTimeDuration"
+          name="partialTimeDuration"
+          [(ngModel)]="newAbsence.PartialTimeDuration"
+        />
+      </div>
+      <div>
+        <label for="isPartial">Is Partial:</label>
+        <input
+          type="checkbox"
+          id="isPartial"
+          name="isPartial"
+          [(ngModel)]="newAbsence.IsPartial"
+        />
+      </div>
+      <div>
+        <label for="overrideHolidayAbsence">Override Holiday Absence:</label>
+        <input
+          type="checkbox"
+          id="overrideHolidayAbsence"
+          name="overrideHolidayAbsence"
+          [(ngModel)]="newAbsence.OverrideHolidayAbsence"
+        />
+      </div>
+      <button type="submit">Submit Absence</button>
+    </form>
+  </div>
+
+  <!-- User List -->
   <h2>User List</h2>
   <table>
     <thead>
@@ -30,6 +114,7 @@
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +122,9 @@
         <td>{{ user.Id }}</td>
         <td>{{ user.FirstName }}</td>
         <td>{{ user.LastName }}</td>
+        <td>
+          <button (click)="showAbsenceForm(user.Id)">Add Absence</button>
+        </td>
       </tr>
     </tbody>
   </table>

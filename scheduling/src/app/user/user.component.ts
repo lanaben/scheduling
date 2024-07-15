@@ -12,18 +12,30 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserComponent implements OnInit {
   users: any[] = [];
-  selectedUserId: number | undefined;
   selectedUser: any;
+
   newUser = {
     firstName: '',
     lastName: ''
+  };
+
+  selectedUserId: string | null = null;
+
+  newAbsence = {
+    AbsenceDefinitionId: '',
+    Timestamp: '',
+    Comment: '',
+    PartialTimeFrom: '',
+    PartialTimeTo: '',
+    PartialTimeDuration: 0,
+    IsPartial: false,
+    OverrideHolidayAbsence: false
   };
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadUsers();
-    this.onSubmit();
   }
 
   loadUsers(): void {
@@ -45,5 +57,32 @@ export class UserComponent implements OnInit {
         console.error('Error adding user:', error);
       }
     );
+  }
+
+  showAbsenceForm(userId: string): void {
+    console.log(`User ID: ${userId}`);
+    this.selectedUserId = userId;
+  }
+
+  submitAbsence(): void {
+    if (this.selectedUserId) {
+      const absence = {
+        UserId: this.selectedUserId,
+        ...this.newAbsence,
+        Timestamp: new Date(this.newAbsence.Timestamp).toISOString(),
+        PartialTimeFrom: new Date(this.newAbsence.PartialTimeFrom).toISOString(),
+        PartialTimeTo: new Date(this.newAbsence.PartialTimeTo).toISOString()
+      };
+
+      this.userService.addAbsence(absence).subscribe(
+        response => {
+          console.log('Absence added successfully:', response);
+          this.selectedUserId = null;
+        },
+        error => {
+          console.error('Error adding absence:', error);
+        }
+      );
+    }
   }
 }

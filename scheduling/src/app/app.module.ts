@@ -7,6 +7,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { CommonModule } from '@angular/common';
 import { UserModule } from './user/user.module';
 import { UserComponent } from './user/user.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { UserComponent } from './user/user.component';
     BrowserModule,
     UserModule,
     HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
   ],
   providers: [
     provideHttpClient(withFetch()),
