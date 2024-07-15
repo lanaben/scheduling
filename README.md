@@ -31,6 +31,21 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    npm install
 
+4. Add environment file
+
+   Create or update `environment.ts` in scheduling folder 
+
+   ```typescript
+   // scheduling/environment.ts
+
+    export const environment = {
+      production: false,
+      clientId: 'client-id',
+      clientSecret: 'client-secret',
+      authUrl: 'https://login.allhours.com/connect/token',
+      apiUrl: 'https://api4.allhours.com'
+    };
+
 
 ### Usage
 
