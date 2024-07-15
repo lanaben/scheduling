@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
       (response: any) => {
         this.accessToken = response.access_token;
         console.log('Access Token:', this.accessToken);
-        // You can store this token or use it as needed
       },
       (error) => {
         console.error('Error fetching token:', error);

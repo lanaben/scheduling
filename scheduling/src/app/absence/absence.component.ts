@@ -1,19 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { AbsenceService } from './absence.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Absence {
-  UserId: string;
-  Timestamp: string;
-  AbsenceDefinitionId: string;
-  Comment: string;
-  PartialTimeFrom: string;
-  PartialTimeTo: string;
-  PartialTimeDuration: number;
-  IsPartial: boolean;
-  OverrideHolidayAbsence: boolean;
-}
 
 @Component({
   selector: 'app-absence',
@@ -23,11 +11,11 @@ interface Absence {
   imports: [CommonModule, FormsModule],
 })
 export class AbsenceComponent implements OnInit {
-  absences: Absence[] = [];
+  absences: any[] = [];
   selectedDate: string = '';
   isLoading: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private absenceService: AbsenceService) { }
 
   ngOnInit(): void {
     this.loadAbsences();
@@ -36,24 +24,16 @@ export class AbsenceComponent implements OnInit {
   loadAbsences(): void {
     if (this.selectedDate) {
       this.isLoading = true;
-      const formattedDate = new Date(this.selectedDate).toISOString().split('T')[0];
-      const url = `https://api4.allhours.com/api/v1/Absences`;
-      const headers = this.getHeaders();
-
-      this.http.get<Absence[]>(url, { headers })
-        .subscribe(
-          absences => {
-            this.absences = absences.filter(absence => {
-              const absenceDate = new Date(absence.Timestamp).toISOString().split('T')[0];
-              return absenceDate === formattedDate;
-            });
-            this.isLoading = false;
-          },
-          error => {
-            console.error('Error loading absences:', error);
-            this.isLoading = false;
-          }
-        );
+      this.absenceService.getAbsencesByDate(this.selectedDate).subscribe(
+        absences => {
+          this.absences = absences;
+          this.isLoading = false;
+        },
+        error => {
+          console.error('Error loading absences:', error);
+          this.isLoading = false;
+        }
+      );
     }
   }
 
@@ -65,19 +45,5 @@ export class AbsenceComponent implements OnInit {
 
   refreshAbsences(): void {
     this.loadAbsences();
-  }
-
-  private getHeaders(): HttpHeaders {
-    const accessToken = localStorage.getItem('access_token');
-
-    if (accessToken) {
-      return new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      });
-    } else {
-      console.error('Access token not found in local storage');
-      return new HttpHeaders();
-    }
   }
 }

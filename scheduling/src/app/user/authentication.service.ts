@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError,tap } from 'rxjs/operators';
-import { environment } from '../../environment';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   private tokenUrl = '/api/connect/token';
   private clientId = environment.clientId;
   private clientSecret = environment.clientSecret;
@@ -36,7 +35,6 @@ export class AuthenticationService {
       catchError(this.handleError)
     );
   }
-
 
   private saveAuthData(accessToken: string): void {
     localStorage.setItem('access_token', accessToken);

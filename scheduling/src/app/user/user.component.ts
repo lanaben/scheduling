@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from './user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +12,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserComponent implements OnInit {
   users: any[] = [];
+  filteredUsers: any[] = [];
   selectedUser: any;
 
   newUser = {
     firstName: '',
-    lastName: ''
+    lastName: '',
+    email: ''
   };
+
+  searchFirstName: string = '';
+  searchLastName: string = '';
 
   selectedUserId: string | null = null;
 
@@ -32,7 +37,8 @@ export class UserComponent implements OnInit {
     OverrideHolidayAbsence: false
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private renderer: Renderer2,
+    private el: ElementRef) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -40,17 +46,19 @@ export class UserComponent implements OnInit {
 
   loadUsers(): void {
     this.userService.getUsers().subscribe(
-      users => this.users = users,
+      users => {
+        this.users = users;
+        this.filteredUsers = users;
+      },
       error => console.error('Error fetching users:', error)
     );
   }
 
   onSubmit(): void {
-    console.log("test");
     this.userService.addUser(this.newUser).subscribe(
       response => {
         console.log('User added successfully:', response);
-        this.newUser = { firstName: '', lastName: '' };
+        this.newUser = { firstName: '', lastName: '', email: '' };
         this.loadUsers();
       },
       error => {
@@ -62,6 +70,10 @@ export class UserComponent implements OnInit {
   showAbsenceForm(userId: string): void {
     console.log(`User ID: ${userId}`);
     this.selectedUserId = userId;
+    const absenseFormContainer = this.el.nativeElement.querySelector('.absence-form-container');
+    if (absenseFormContainer) {
+      absenseFormContainer.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   submitAbsence(): void {
@@ -84,5 +96,12 @@ export class UserComponent implements OnInit {
         }
       );
     }
+  }
+
+  searchUsers(): void {
+    this.filteredUsers = this.users.filter(user =>
+      user.FirstName.toLowerCase().includes(this.searchFirstName.toLowerCase()) &&
+      user.LastName.toLowerCase().includes(this.searchLastName.toLowerCase())
+    );
   }
 }

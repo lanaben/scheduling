@@ -1,5 +1,5 @@
 .user-list {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -7,73 +7,39 @@
   background-color: #f9f9f9;
 }
 
-h2 {
-  text-align: center;
-  color: #333;
-}
-
-form {
-  margin-bottom: 20px;
-}
-
-form div {
-  margin-bottom: 10px;
+.form-group {
+  margin-bottom: 15px;
 }
 
 label {
-  display: inline-block;
-  width: 150px;
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 input[type="text"],
+input[type="email"],
 input[type="datetime-local"],
 input[type="number"] {
-  width: calc(100% - 160px);
-  padding: 5px;
+  width: 100%;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 input[type="checkbox"] {
-  margin-left: 150px;
+  margin-right: 10px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+.search-form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-form input {
+  margin: 5px;
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-table, th, td {
-  border: 1px solid #ddd;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-.absence-form-container {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
 }
