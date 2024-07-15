@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AbsenceService {
 
-  private apiUrl = 'https://api4.allhours.com/api/v1/Absences';
+  private apiUrl = `${environment.apiUrl}/api/v1/Absences`;
 
   constructor(private http: HttpClient) { }
 
