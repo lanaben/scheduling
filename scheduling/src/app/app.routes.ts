@@ -7,5 +7,5 @@ export const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'users', component: UserComponent },
   { path: 'absences', component: AbsenceComponent },
-  { path: '', redirectTo: '/settings', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: '/settings', pathMatch: 'full' },
 ];

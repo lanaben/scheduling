@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AbsenceComponent } from './absence/absence.component';
 import { AbsenceModule } from './absence/absence.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AbsenceModule } from './absence/absence.module';
     UserComponent,
     UserModule,
     AbsenceComponent,
-    AbsenceModule
+    AbsenceModule,
+    RouterModule
   ],
   imports: [
     AppRoutingModule,
@@ -30,6 +32,8 @@ import { AbsenceModule } from './absence/absence.module';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
+    RouterModule,
+    AppRoutingModule,
   ],
   providers: [
     provideHttpClient(withFetch()),

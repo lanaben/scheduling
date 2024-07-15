@@ -37,13 +37,16 @@ export class AbsenceComponent implements OnInit {
     if (this.selectedDate) {
       this.isLoading = true;
       const formattedDate = new Date(this.selectedDate).toISOString().split('T')[0];
-      const url = `https://api4.allhours.com/api/v1/Absences?date=${formattedDate}`;
+      const url = `https://api4.allhours.com/api/v1/Absences`;
       const headers = this.getHeaders();
 
       this.http.get<Absence[]>(url, { headers })
         .subscribe(
           absences => {
-            this.absences = absences;
+            this.absences = absences.filter(absence => {
+              const absenceDate = new Date(absence.Timestamp).toISOString().split('T')[0];
+              return absenceDate === formattedDate;
+            });
             this.isLoading = false;
           },
           error => {

@@ -1,7 +1,10 @@
 <nav>
-  <ul>
-    <li><a routerLink="/users">Users</a></li>
-    <li><a routerLink="/absence">Absences</a></li>
-  </ul>
+  <button routerLink="/users" routerLinkActive="active">Go to Users</button>
+  <button routerLink="/absences" routerLinkActive="active">
+    Go to Absences
+  </button>
+  <button routerLink="/settings" routerLinkActive="active">
+    Go to Settings
+  </button>
 </nav>
 <router-outlet></router-outlet>
