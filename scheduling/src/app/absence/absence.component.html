@@ -1,0 +1,55 @@
+<div class="absence-container">
+  <h2>Absences View</h2>
+
+  <!-- Date Picker -->
+  <div class="date-picker">
+    <label for="absenceDate">Select Date:</label>
+    <input
+      type="date"
+      id="absenceDate"
+      name="absenceDate"
+      [(ngModel)]="selectedDate"
+      (change)="onDateChange($event)"
+    />
+    <button type="button" (click)="refreshAbsences()">Refresh</button>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">Loading...</div>
+
+  <!-- Absences List -->
+  <div *ngIf="!isLoading && absences.length === 0">
+    No absences found for selected date.
+  </div>
+
+  <div *ngIf="absences.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Timestamp</th>
+          <th>Absence Definition ID</th>
+          <th>Comment</th>
+          <th>Partial Time From</th>
+          <th>Partial Time To</th>
+          <th>Partial Time Duration</th>
+          <th>Is Partial</th>
+          <th>Override Holiday Absence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let absence of absences">
+          <td>{{ absence.UserId }}</td>
+          <td>{{ absence.Timestamp }}</td>
+          <td>{{ absence.AbsenceDefinitionId }}</td>
+          <td>{{ absence.Comment }}</td>
+          <td>{{ absence.PartialTimeFrom }}</td>
+          <td>{{ absence.PartialTimeTo }}</td>
+          <td>{{ absence.PartialTimeDuration }}</td>
+          <td>{{ absence.IsPartial }}</td>
+          <td>{{ absence.OverrideHolidayAbsence }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

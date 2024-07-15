@@ -10,13 +10,17 @@ import { UserComponent } from './user/user.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AbsenceComponent } from './absence/absence.component';
+import { AbsenceModule } from './absence/absence.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
     UserComponent,
-    UserModule
+    UserModule,
+    AbsenceComponent,
+    AbsenceModule
   ],
   imports: [
     AppRoutingModule,

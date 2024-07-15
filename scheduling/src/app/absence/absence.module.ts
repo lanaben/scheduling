@@ -1,13 +1,13 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { AbsenceComponent } from './absence.component';
 
 @NgModule({
   declarations: [
-    UserComponent
+    AbsenceComponent
   ],
   imports: [
     CommonModule,
@@ -16,8 +16,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule 
   ],
   exports: [
-    UserComponent
+    AbsenceComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class UserModule { }
+export class AbsenceModule { }
